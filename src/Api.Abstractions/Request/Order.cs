@@ -1,8 +1,6 @@
 namespace SparkPlug.Api.Abstractions;
 
-public enum Direction { Ascending, Descending }
-
-public class Order
+public class Order : IOrder
 {
     public Order(string field, Direction direction)
     {
