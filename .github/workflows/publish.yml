@@ -1,0 +1,33 @@
+name: Publish to nuget
+on:
+  push:
+    paths-ignore:
+      - '.vscode/**'
+      - 'sample/**'
+      - 'test/**'
+      - 'makefile'
+      - '.gitignore'
+    branches:
+      - main # Default release branch, may also be named 'master' or 'develop'
+jobs:
+  publish:
+    name: Build, Pack & Publish
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+            os: [ubuntu-latest]
+            dotnet-version: [6.0.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+    - name: Restore dependencies
+      run: dotnet restore src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj
+    - name: Build
+      run: dotnet build -c release src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-restore
+    - name: Pack
+      run: dotnet pack --no-build -c release src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj -o .
+    - name: Publish
+      run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate --no-symbols

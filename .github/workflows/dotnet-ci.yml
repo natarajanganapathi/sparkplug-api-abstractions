@@ -1,0 +1,33 @@
+name: Dotnet 6 Build
+
+on:
+  push:
+    paths-ignore:
+      - '.vscode/**'
+      - 'sample/**'
+      - 'test/**'
+      - 'README.md'
+      - 'makefile'
+      - '.gitignore'
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build SparkPlug.Api.Abstractions App
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+            os: [ubuntu-latest, windows-latest]
+            dotnet-version: [6.0.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+    - name: Restore dependencies
+      run: dotnet restore src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj
+    - name: Build
+      run: dotnet build src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-restore

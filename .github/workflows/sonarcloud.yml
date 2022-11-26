@@ -1,0 +1,65 @@
+name: SAST With Sonar Cloud
+
+on:
+  push:
+    paths-ignore:
+      - '.vscode/**'
+      - 'sample/**'
+      - 'readme.md'
+      - 'makefile'
+      - '.gitignore'
+    branches: [ "main" ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sast:
+    name: Static Application Security Testing
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: "microsoft"
+          java-version: 11
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Cache SonarQube packages
+        uses: actions/cache@v3
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarQube scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v3
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Install SonarQube scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Install Dotnet Coverage tool
+        shell: powershell
+        run: |
+          New-Item -Path .\.coverage\coverage -ItemType Directory
+          dotnet tool install dotnet-coverage --tool-path .\.coverage\coverage
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          echo "Unit Test Start"
+          .coverage\coverage\dotnet-coverage collect -f xml  -o 'coverage.xml' dotnet test test/Api.Abstractions.Test/SparkPlug.Api.Abstractions.Test.csproj -c release --verbosity normal
+          echo "Sonar Scanner Analysis begin"
+          .sonar\scanner\dotnet-sonarscanner begin /k:"natarajanganapathi_sparkplug-api-abstractions" /o:"natarajan-ganapathi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
+          echo "Build Start"
+          dotnet build src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-incremental
+          echo "Sonar Scanner Analysis end"
+          .sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
