@@ -5,7 +5,7 @@ public interface IApiRequest
     public string[]? Depends { get; set; }
 }
 
-public interface IQueryRequest<TEntity> : IApiRequest
+public interface IQueryRequest : IApiRequest
 {
     string[]? Select { get; set; }
     IFilter? Where { get; set; }

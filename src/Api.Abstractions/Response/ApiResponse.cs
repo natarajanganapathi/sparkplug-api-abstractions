@@ -2,7 +2,7 @@ namespace SparkPlug.Api.Abstractions;
 
 public abstract class ApiResponse : IApiResponse
 {
-    public ApiResponse(string? code = null, string? message = null)
+    protected ApiResponse(string? code = null, string? message = null)
     {
         Code = code;
         Message = message;

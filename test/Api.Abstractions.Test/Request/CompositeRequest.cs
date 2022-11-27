@@ -15,7 +15,7 @@ public class Test_CompositeRequest
     {
         var comr = new CompositeRequest()
             .Add("CommandRequest", new CommandRequest<Int32>())
-            .Add("QueryRequest", new QueryRequest<Int32>())
+            .Add("QueryRequest", new QueryRequest())
             .Add("UpdateRequest", new CommandRequest<Int32>());
 
         Assert.NotNull(comr);
