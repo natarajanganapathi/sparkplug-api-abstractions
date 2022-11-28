@@ -2,7 +2,7 @@ namespace SparkPlug.Api.Abstractions;
 
 public class QueryRequest : ApiRequest, IQueryRequest
 {
-    public QueryRequest(string[]? select = null, IFilter? where = null, Order[]? sort = null, PageContext? page = null)
+    public QueryRequest(string[]? select = null, IFilter? where = null, IOrder[]? sort = null, IPageContext? page = null)
     {
         Select = select;
         Where = where;
@@ -13,7 +13,7 @@ public class QueryRequest : ApiRequest, IQueryRequest
     public IFilter? Where { get; set; }
     public IFilter? Having { get; set; }
     public string[]? Group { get; set; }
-    public Order[]? Sort { get; set; }
+    public IOrder[]? Sort { get; set; }
     public IPageContext? Page { get; set; }
 }
 

@@ -11,7 +11,7 @@ public interface IQueryRequest : IApiRequest
     IFilter? Where { get; set; }
     IFilter? Having { get; set; }
     string[]? Group { get; set; }
-    Order[]? Sort { get; set; }
+    IOrder[]? Sort { get; set; }
     IPageContext? Page { get; set; }
 }
 
