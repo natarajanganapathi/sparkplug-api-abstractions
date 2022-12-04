@@ -6,7 +6,4 @@ global using MongoDB.Bson;
 
 global using SparkPlug.Contracts;
 
-
-global using  SparkPlug.Persistence.Abstractions;
-
-// global using SparkPlug.
+global using SparkPlug.Persistence.Abstractions;

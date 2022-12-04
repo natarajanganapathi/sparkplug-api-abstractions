@@ -1,9 +1,9 @@
-namespace SparkPlug.Sample.DemoApi.Controllers;
+namespace SparkPlug.Api.Abstractions.Controllers;
 
 [Route("[controller]")]
 public abstract class BaseController<TRepository, TEntity> : ControllerBase where TRepository : IRepository<String, TEntity>
 {
-    protected readonly TRepository _repository;
+    protected readonly IRepository<String, TEntity> _repository;
     protected readonly ILogger<BaseController<TRepository, TEntity>> _logger;
 
     public BaseController(ILogger<BaseController<TRepository, TEntity>> logger, TRepository repository)

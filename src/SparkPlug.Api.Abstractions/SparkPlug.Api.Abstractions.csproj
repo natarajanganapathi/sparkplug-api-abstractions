@@ -20,4 +20,8 @@
     <PackageReference Include="SparkPlug.MongoDb" Version="0.0.1-alpha2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
+
+  <!-- <ItemGroup>
+    <ProjectReference Include="..\..\..\sparkplug-mongodb\src\SparkPlug.MongoDb\SparkPlug.MongoDb.csproj" />
+  </ItemGroup> -->
 </Project>
