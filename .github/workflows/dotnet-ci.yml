@@ -28,6 +28,6 @@ jobs:
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
     - name: Restore dependencies
-      run: dotnet restore src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj
+      run: dotnet restore src/SparkPlug.Api.Abstractions/SparkPlug.Api.Abstractions.csproj
     - name: Build
-      run: dotnet build src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-restore
+      run: dotnet build src/SparkPlug.Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-restore

@@ -24,10 +24,10 @@ jobs:
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
     - name: Restore dependencies
-      run: dotnet restore src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj
+      run: dotnet restore src/SparkPlug.Api.Abstractions/SparkPlug.Api.Abstractions.csproj
     - name: Build
-      run: dotnet build -c release src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-restore
+      run: dotnet build -c release src/SparkPlug.Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-restore
     - name: Pack
-      run: dotnet pack --no-build -c release src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj -o .
+      run: dotnet pack --no-build -c release src/SparkPlug.Api.Abstractions/SparkPlug.Api.Abstractions.csproj -o .
     - name: Publish
       run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate --no-symbols

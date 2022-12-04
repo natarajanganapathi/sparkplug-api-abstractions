@@ -5,11 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CFADE13C-C9D7-4567-BBAA-5696A78F4C32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparkPlug.Api.Abstractions", "src\Api.Abstractions\SparkPlug.Api.Abstractions.csproj", "{FE5A7D9C-4AB2-4FC1-8636-AB608EFEB4A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparkPlug.Api.Abstractions", "src\SparkPlug.Api.Abstractions\SparkPlug.Api.Abstractions.csproj", "{FE5A7D9C-4AB2-4FC1-8636-AB608EFEB4A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6BE0AD2B-4D15-47BB-B8A0-4C556B44314D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparkPlug.Api.Abstractions.Test", "test\Api.Abstractions.Test\SparkPlug.Api.Abstractions.Test.csproj", "{0EA1FECE-28D0-4785-9D57-D3B3FE004423}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparkPlug.Api.Abstractions.Test", "test\SparkPlug.Api.Abstractions.Test\SparkPlug.Api.Abstractions.Test.csproj", "{0EA1FECE-28D0-4785-9D57-D3B3FE004423}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

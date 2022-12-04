@@ -24,6 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Api.Abstractions\SparkPlug.Api.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\SparkPlug.Api.Abstractions\SparkPlug.Api.Abstractions.csproj" />
   </ItemGroup>
 </Project>

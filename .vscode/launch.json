@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Api.Abstractions/bin/Debug/net6.0/SparkPlug.Api.Abstractions.dll",
+            "program": "${workspaceFolder}/src/SparkPlug.Api.Abstractions/bin/Debug/net6.0/SparkPlug.Api.Abstractions.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",

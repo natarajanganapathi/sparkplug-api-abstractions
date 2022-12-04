@@ -56,10 +56,10 @@ jobs:
         shell: powershell
         run: |
           echo "Unit Test Start"
-          .coverage\coverage\dotnet-coverage collect -f xml  -o 'coverage.xml' dotnet test test/Api.Abstractions.Test/SparkPlug.Api.Abstractions.Test.csproj -c release --verbosity normal
+          .coverage\coverage\dotnet-coverage collect -f xml  -o 'coverage.xml' dotnet test test/SparkPlug.Api.Abstractions.Test/SparkPlug.Api.Abstractions.Test.csproj -c release --verbosity normal
           echo "Sonar Scanner Analysis begin"
           .sonar\scanner\dotnet-sonarscanner begin /k:"natarajanganapathi_sparkplug-api-abstractions" /o:"natarajan-ganapathi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           echo "Build Start"
-          dotnet build src/Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-incremental
+          dotnet build src/SparkPlug.Api.Abstractions/SparkPlug.Api.Abstractions.csproj --no-incremental
           echo "Sonar Scanner Analysis end"
           .sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
